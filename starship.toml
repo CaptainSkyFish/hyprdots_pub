@@ -1,0 +1,162 @@
+format = """
+[](#A3C4F3)\
+$os\
+$username\
+[](bg:#C9E4DE fg:#A3C4F3)\
+$directory\
+[](fg:#C9E4DE bg:#EEE8AB)\
+$git_branch\
+$git_status\
+[](fg:#EEE8AB bg:#c79a99)\
+$c\
+$lua\
+$python\
+$golang\
+$haskell\
+$java\
+$nodejs\
+$rust\
+[](fg:#c79a99 bg:#9BBAD3)\
+$docker_context\
+[](fg:#9BBAD3 bg:#CED1F8)\
+$time\
+[ ](fg:#CED1F8 bg:#524175")
+$character
+"""
+command_timeout = 800
+
+# Disable the blank line at the start of the prompt
+# add_newline = false
+
+
+[username]
+show_always = true
+style_user = "fg:#1E2B48 bg:#A3C4F3"
+style_root = "fg:#1E2B48 bg:#A3C4F3"
+format = '[$user ]($style)'
+disabled = false
+
+[os]
+style = "fg:#1E2B48 bg:#A3C4F3"
+disabled = false # Disabled by default
+format = '[$symbol]($style)'
+[os.symbols]
+Arch = "󰣇 "
+EndeavourOS = "󰣇 "
+
+
+[directory]
+style = "fg:#244857 bg:#C9E4DE"
+format = "[ $path ]($style)"
+truncation_length = 1
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[c]
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = "󱘗 "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[python]
+symbol = '󰌠'
+python_binary = ".venv/bin/python"
+detect_extensions = ["py"]
+detect_files = ["pyproject.toml", "requirements.txt", "setup.py", "Pipfile"]
+detect_folders = ["venv", ".venv"]
+style ="fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol (\($virtualenv\)) (${version}) ]($style)'  
+
+[docker_context]
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol $context ]($style)'
+
+[lua]
+disabled = false
+symbol = ' '
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol $version ]($style)'
+
+[git_branch]
+symbol = " "
+style = "fg:#263741 bg:#EEE8AB"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "fg:#263741 bg:#EEE8AB"
+format = '[$all_status$ahead_behind ]($style)'
+# untracked = "[ U](fg: #263741, bg: #EEE8AB)"
+# modified = "[ M](fg: #263741, bg: #EEE8AB)"
+
+[golang]
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "fg:#524175 bg:#CED1F8"
+format = '[ $time ]($style)'
+
+[elixir]
+disabled = true
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[elm]
+disabled = true
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[gradle]
+disabled = true
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[haskell]
+disabled = true
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[julia]
+disabled = true
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[nim]
+disabled = true
+symbol = "󰆥 "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ]($style)'
+
+[scala]
+disabled = true
+symbol = " "
+style = "fg:#3B0A0A bg:#C79A99"
+format = '[ $symbol ($version) ($virtualenv)]($style)'
+
