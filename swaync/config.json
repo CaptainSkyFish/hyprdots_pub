@@ -106,6 +106,25 @@
               }
           ]
       }
+  },
+  "scripts": {
+    "ocr": {
+      "exec": "~/.config/hypr/scripts/run-ocr-screenshot.sh",
+      "run-on": "action",
+      "app-name": "grim",
+      "summary": "Screenshot copied to clipboard"
+    },
+    "balanced": {
+      "exec": "powerprofilesctl set balanced",
+      "run-on": "action",
+      "app-name": "Battery",
+      "summary": "Plugged In"
+    },
+    "power-saver": {
+      "exec": "powerprofilesctl set power-saver",
+      "run-on": "action",
+      "app-name": "Battery",
+      "summary": "Battery Low!"
+    }
   }
 }
-

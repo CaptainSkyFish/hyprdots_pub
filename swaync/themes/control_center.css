@@ -46,8 +46,9 @@
 .control-center
   .notification-row
   .notification-background
-  .notification.critical {
-  color: @urgent;
+  .notification.critical
+  .body {
+  color: #d71921;
 }
 
 .control-center
@@ -65,40 +66,65 @@
   .notification
   > *:last-child
   > * {
-  min-height: 3.4em;
+  min-height: 3rem;
 }
 
 .control-center
   .notification-row
   .notification-background
   .notification
-  > *:last-child
-  > *
-  .notification-action {
-  background: alpha(@selected, 0.6);
+  .notification-alt-actions.horizontal {
+  border-top: 1px dotted @selected;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-alt-actions.horizontal
+  .notification-action:not(:first-child) {
+  border-left: 1px dotted @selected;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-alt-actions.horizontal
+  .notification-action
+  button {
   color: @text;
-  border-radius: 14px;
-  margin: 6px;
+  border-radius: 8px;
+  background-color: transparent;
 }
 
 .control-center
   .notification-row
   .notification-background
   .notification
-  > *:last-child
-  > *
-  .notification-action:hover {
-  background: @selected;
+  .notification-alt-actions.horizontal
+  .notification-action
+  button:hover {
+  background-color: alpha(@hover, 0.3);
+  text-decoration: @selected underline;
+}
+
+.control-center .notification-row .notification-background .notification .time {
+  color: alpha(@text, 0.6);
+  font-weight: 600;
+  /* letter-spacing: 0.5px; */
+  font-size: 0.8rem;
 }
 
 .control-center
   .notification-row
   .notification-background
   .notification
-  > *:last-child
-  > *
-  .notification-action:active {
+  .notification-alt-actions.horizontal
+  .notification-action
+  button:active {
   background-color: @selected;
+  color: @background;
 }
 
 /* Buttons */
