@@ -12,19 +12,20 @@
   "control-center-margin-left": 0,
   "notification-2fa-action": false,
   "notification-inline-replies": true,
-  "notification-icon-size": 44,
+  "notification-icon-size": 40,
   "notification-body-image-height": 100,
   "notification-body-image-width": 100,
   "notification-window-width": 400,
   "timeout": 6,
   "timeout-low": 3,
+  "text-empty": "",
   "timeout-critical": 0,
   "fit-to-screen": true,
   "control-center-width": 380,
   "control-center-height": 800,
   "keyboard-shortcuts": true,
   "image-visibility": "when available",
-  "transition-time": 200,
+  "transition-time": 50,
   "hide-on-clear": false,
   "hide-on-action": true,
   "script-fail-notify": true,
@@ -60,34 +61,70 @@
       },
       "mpris": {
           "image-size": 100,
-          "autohide": true,
+          "autohide": false,
+          "show-album-art": "always",
+          "loop-carousel": true,
           "image-radius": 12
       },
       "buttons-grid": {
+        "buttons-per-row": 4,
           "actions": [
               {
-                  "label": "󰐥",
-                  "command": "bash -c $HOME/.config/hypr/scripts/Wlogout.sh"
+                "label": "󰐥",
+                "command": "bash -c $HOME/.config/hypr/scripts/Wlogout.sh"
               },
               {
-                  "label": "󰌾",
+                  "label": "",
                   "command": "bash -c $HOME/.config/hypr/scripts/hyprlock.sh"
               },
               {
-                  "label": "󰍃",
-                  "command": "hyprctl dispatch exit"
+                "label": "",
+                "command": "bash -c $HOME/.config/hypr/scripts/powerprofiles.sh"
               },
               {
-                  "label": "󰀝",
+                "label": "",
+                "command": "localsend"
+              },
+              {
+                  "label": "",
+                  "type": "toggle",
+                  "command": "bash -c $HOME/.config/hypr/scripts/hyprsunset.sh"
+              },
+              {
+                  "label": "",
+                  "type": "toggle",
                   "command": "bash -c $HOME/.config/hypr/scripts/AirplaneMode.sh"
               },
               {
-                  "label": "󰝟",
+                  "label": "",
+                  "type": "toggle",
                   "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
-
+              },
+              {
+                "label": "",
+                "command": "bash -c $HOME/.config/hypr/scripts/weather_report.sh"
               }
           ]
       }
+  },
+  "scripts": {
+    "ocr": {
+      "exec": "~/.config/hypr/scripts/run-ocr-screenshot.sh",
+      "run-on": "action",
+      "app-name": "grim",
+      "summary": "Screenshot copied to clipboard"
+    },
+    "balanced": {
+      "exec": "powerprofilesctl set balanced",
+      "run-on": "action",
+      "app-name": "Battery",
+      "summary": "Plugged In"
+    },
+    "power-saver": {
+      "exec": "powerprofilesctl set power-saver",
+      "run-on": "action",
+      "app-name": "Battery",
+      "summary": "Battery Low!"
+    }
   }
 }
-

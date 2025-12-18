@@ -1,22 +1,26 @@
 #!/bin/bash
-# Camera device; adjust if yours is different (default is /dev/video0)
-CAMERA_DEV="/dev/video0"
-LED_DEV="asus::camera"  # Change if your LED device is named differently
 
-# Function to check if camera is enabled
+CAMERA_DEV="/dev/video0"
+LED_DEV="asus::camera"
+ICON_DIR="$HOME/.config/swaync/icons"
+
 is_camera_enabled() {
     [ -c "$CAMERA_DEV" ] && [ -r "$CAMERA_DEV" ] && [ -w "$CAMERA_DEV" ]
 }
 
-# Toggle camera
 if is_camera_enabled; then
-    # Disable (restrict) camera: remove permissions for everyone
-    sudo chmod 000 "$CAMERA_DEV"
-    brightnessctl -d "$LED_DEV" set 1   # Turn LED ON (camera off)
-    notify-send "Camera" "Disabled"
+    if sudo chmod 000 "$CAMERA_DEV"; then
+        brightnessctl -d "$LED_DEV" set 1
+        notify-send -a "Camera" -i "$ICON_DIR/camera-slash.svg" "Camera" "Disabled"
+    else
+        notify-send -a "Camera" "Camera" "Failed to disable (chmod error)"
+    fi
 else
-    # Enable camera: restore permissions for user and group
-    sudo chmod 660 "$CAMERA_DEV"
-    brightnessctl -d "$LED_DEV" set 0   # Turn LED OFF (camera on)
-    notify-send "Camera" "Enabled"
+    if sudo chmod 660 "$CAMERA_DEV"; then
+        brightnessctl -d "$LED_DEV" set 0
+        notify-send -a "Camera" -i "$ICON_DIR/camera.svg" "Camera" "Enabled"
+    else
+        notify-send -a "Camera" "Camera" "Failed to enable (chmod error)"
+    fi
 fi
+

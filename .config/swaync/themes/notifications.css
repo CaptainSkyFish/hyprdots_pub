@@ -1,8 +1,8 @@
 @define-color text            @inverse_surface;
 @define-color background-alt  @background;
 @define-color selected        @on_secondary;
-@define-color hover           @on_secondary_fixed_variant;
-@define-color urgent          @on_secondary_fixed;
+@define-color hover           @on_primary;
+@define-color urgent          @error;
 
 * {
   /*background-alt:        @color1;      Buttons background */
@@ -26,10 +26,10 @@
 }
 
 .floating-notifications.background .notification-row .notification-background {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: alpha(@surface_dim, 0.7);
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
   border: 1px solid @selected;
-  border-style: dotted;
+  /* border-style: dotted; */
   border-radius: 14px;
   margin: 16px;
   padding: 0;
@@ -57,61 +57,78 @@
   .notification
   > *:last-child
   > * {
-  min-height: 3.4em;
+  min-height: 3rem;
 }
 
 .floating-notifications.background
   .notification-row
   .notification-background
   .notification
-  > *:last-child
-  > *
-  .notification-action {
+  .notification-alt-actions.horizontal {
+  border-top: 1px dotted @selected;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-alt-actions.horizontal
+  .notification-action:not(:first-child) {
+  border-left: 1px dotted @selected;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-alt-actions
+  .notification-action
+  button {
+  color: @text;
   border-radius: 8px;
-  background-color: @background-alt;
-  margin: 6px;
-  border: 1px solid transparent;
+  background-color: transparent;
 }
 
 .floating-notifications.background
   .notification-row
   .notification-background
   .notification
-  > *:last-child
-  > *
-  .notification-action:hover {
-  background-color: @hover;
-  border: 1px solid @selected;
+  .notification-alt-actions
+  .notification-action
+  button:hover {
+  background-color: alpha(@hover, 0.3);
+  text-decoration: @selected underline;
 }
 
 .floating-notifications.background
   .notification-row
   .notification-background
   .notification
-  > *:last-child
-  > *
-  .notification-action:active {
+  .notification-alt-actions
+  .notification-action
+  button:active {
   background-color: @selected;
   color: @background;
 }
 
 .image {
-  margin: 10px 20px 10px 0px;
+  margin: 8px 20px 8px 0px;
   border-radius: 10px;
 }
 
 .summary {
   color: @text;
   font-weight: 800;
-  font-size: 1.2rem;
-  margin-bottom: 0.3rem;
-  line-height: 1.3;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
 }
 
 .body {
   color: @text;
-  font-size: 1rem;
-  line-height: 1.4;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1;
   /* white-space: normal; */
   /* word-wrap: break-word; */
 }
@@ -143,16 +160,67 @@
   color: @background;
 }
 
-.notification.critical progress {
-  background-color: @error;
-}
-
-.notification.low progress,
-.notification.normal progress {
-  background-color: @hover;
-}
-
 /* .floating-notifications.background .notification.critical .summary, */
 .floating-notifications.background .notification.critical .body {
   color: #d71921;
 }
+
+/* Progress bar container */
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  progressbar {
+  min-height: 6px;
+  border-radius: 8px;
+  background-color: alpha(@hover, 0.2);
+  margin: 2px 10px;
+  padding: 4px;
+}
+
+/* Progress bar fill (trough) */
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  progressbar
+  trough {
+  min-height: 8px;
+  border-radius: 4px;
+  background-color: transparent;
+  box-shadow: inset 0 0 3px alpha(@text, 0.3);
+}
+
+/* Progress bar actual progress */
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  progressbar
+  trough
+  progress {
+  min-height: 8px;
+  border-radius: 4px;
+  background-color: alpha(@text, 0.5);
+  /* background-image: linear-gradient(to right, @selected, @hover); */
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification.critical
+  .notification-content
+  progressbar
+  trough
+  progress {
+  background-color: alpha(#d71921, 0.5);
+}
+
+/**/
+/* .notification.low progressbar, */
+/* .notification.normal progressbar { */
+/*   background-color: @hover; */
+/* } */
